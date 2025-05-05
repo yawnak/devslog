@@ -276,6 +276,9 @@ func (h *developHandler) colorize(b []byte, as attributes, l int, g []string, vi
 		if h.opts.ReplaceAttr != nil {
 			a = h.opts.ReplaceAttr(g, a)
 		}
+		if a.Key == "" && a.Value.Kind() == slog.KindAny {
+			continue
+		}
 
 		k := h.cs([]byte(a.Key), fgMagenta)
 		v := []byte(a.Value.String())
